@@ -1,0 +1,137 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/contao-seo/languages/en/tl_page.php" source-language="en" target-language="fr">
+    <body>
+		<trans-unit id="tl_page.opengraph_legend">
+			<source>OpenGraph Metatags</source>
+			<target>Balises OpenGraph</target>
+		</trans-unit>
+		<trans-unit id="tl_page.twitter_legend">
+			<source>Twitter Metatags</source>
+			<target>Balises Twitter</target>
+		</trans-unit>
+
+		<trans-unit id="tl_page.metaCanonical.0">
+			<source>Canonical URL</source>
+			<target>URL Canonical</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaCanonical.1">
+			<source>Enter the page canonical URL (Google Support : https://support.google.com/webmasters/answer/139066?hl=en)</source>
+			<target>Saisissez l'URL canonique de cette page (Support Google : https://support.google.com/webmasters/answer/139066?hl=fr)</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaImage.0">
+			<source>Meta Image</source>
+			<target>Meta Image</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaImage.1">
+			<source>Select the image you want to use in global meta tags</source>
+			<target>Sélectionnez l'image que vous souhaitez utiliser pour les balises meta globales</target>
+		</trans-unit>
+
+		<trans-unit id="tl_page.overrideOGTags.0">
+			<source>Override tags</source>
+			<target>Surcharger les balises</target>
+		</trans-unit>
+		<trans-unit id="tl_page.overrideOGTags.1">
+			<source>Check to override Open-Graph tags</source>
+			<target>Cochez pour surcharger les balises Open-Graph</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaOGTitle.0">
+			<source>Title tag</source>
+			<target>Balise title</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaOGTitle.1">
+			<source>Enter the title tag</source>
+			<target>Entrez la balise title</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaOGType.0">
+			<source>Type tag</source>
+			<target>Balise tag</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaOGType.1">
+			<source>Enter the type tag</source>
+			<target>Entrez la balise type</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaOGImage.0">
+			<source>Image tag</source>
+			<target>Balise image</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaOGImage.1">
+			<source>Select the image for the tag</source>
+			<target>Sélectionnez l'image du tag</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaOGUrl.0">
+			<source>URL tag</source>
+			<target>Balise URL</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaOGUrl.1">
+			<source>Enter the url tag</source>
+			<target>Entrez la balise url</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaOGDescription.0">
+			<source>Description tag</source>
+			<target>Balise description</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaOGDescription.1">
+			<source>Enter the description tag</source>
+			<target>Entrez la balise description</target>
+		</trans-unit>
+
+		<trans-unit id="tl_page.overrideTwitterTags.0">
+			<source>Override tags</source>
+			<target>Surcharger les balises</target>
+		</trans-unit>
+		<trans-unit id="tl_page.overrideTwitterTags.1">
+			<source>Check to override Twitter tags</source>
+			<target>Cochez pour surcharger les balises Twitter</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaTwitterCard.0">
+			<source>Twitter card tag</source>
+			<target>Balise Twitter Card</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaTwitterCard.1">
+			<source>Enter Twitter Card tag</source>
+			<target>Entrez la balise Twitter Card</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaTwitterSite.0">
+			<source>Twitter Site tag</source>
+			<target>Balise Twitter Site</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaTwitterSite.1">
+			<source>Enter Twitter Site tag</source>
+			<target>Entrez la balise Twitter Site</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaTwitterTitle.0">
+			<source>Twitter Title tag</source>
+			<target>Balise Twitter Title</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaTwitterTitle.1">
+			<source>Enter Twitter Title tag</source>
+			<target>Entrez la balise Twitter Title</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaTwitterDescription.0">
+			<source>Twitter Description tag</source>
+			<target>Balise Twitter Description</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaTwitterDescription.1">
+			<source>Enter Twitter Description tag</source>
+			<target>Entrez la balise Twitter Description</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaTwitterImage.0">
+			<source>Twitter Image tag</source>
+			<target>Balise Twitter Image</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaTwitterImage.1">
+			<source>Enter Twitter Image tag</source>
+			<target>Entrez la balise Twitter Image</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaTwitterImageAlt.0">
+			<source>Twitter Image Alt tag</source>
+			<target>Balise Twitter Image Alt</target>
+		</trans-unit>
+		<trans-unit id="tl_page.metaTwitterImageAlt.1">
+			<source>Enter Twitter Image Alt tag</source>
+			<target>Entrez la balise Twitter Image Alt</target>
+		</trans-unit>
+    </body>
+  </file>
+</xliff>
