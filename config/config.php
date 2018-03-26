@@ -10,5 +10,5 @@
 
 if(TL_MODE == "FE")
 {
-	//$GLOBALS['TL_HOOKS']['generatePage'][] = array('WEM\SEO\Hooks', 'applySEORules');
+	$GLOBALS['TL_HOOKS']['generatePage'][] = array('WEM\SEO\Hooks', 'applySEORules');
 }
