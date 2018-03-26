@@ -1,0 +1,34 @@
+{
+    "name": "webexmachina/contao-seo",
+    "description": "SEO extensions for Contao Open Source CMS",
+    "keywords": ["seo", "meta", "tags", "webexmachina", "module", "contao"],
+    "type": "contao-module",
+    "license": "LGPL-3.0+",
+    "authors": [
+        {
+            "name": "Web ex Machina",
+            "homepage": "https://www.webexmachina.fr",
+            "role":"Developer"
+        }
+    ],
+    "support":{
+        "website":"https://www.webexmachina.fr/",
+        "issues":"https://github.com/webexmachina/contao-seo/issues",
+        "source":"https://github.com/webexmachina/contao-seo"
+    },
+    "require": {
+        "php": ">=5.5",
+        "contao/core-bundle": "~3.2 || ~4.1",
+        "contao-community-alliance/composer-plugin": "~2.4 || ~3.0"
+    },
+    "extra": {
+        "contao": {
+            "sources": {
+                "": "system/modules/contao-seo"
+            },
+            "runonce": [
+                "system/modules/contao-seo/config/runonce.php"
+            ]
+        }
+    }
+}
