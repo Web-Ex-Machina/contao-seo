@@ -8,7 +8,33 @@
  * @author Web ex Machina <https://www.webexmachina.fr>
  */
 
-if(TL_MODE == "FE")
-{
+/**
+ * Back end modules
+ */
+array_insert($GLOBALS['BE_MOD'], 1, array
+(
+	"wem_seo" => array
+	(
+		"seo_urls" => array
+		(
+			'tables' => array("tl_page")
+		),
+	)
+));
+
+/**
+ * Back end style
+ */
+if ('BE' === TL_MODE) {
+    $GLOBALS['TL_CSS'][] = 'system/modules/wem-contao-seo/assets/backend.css';
+}
+
+/**
+ * Register Hooks
+ */
+if('FE' === TL_MODE) {
 	$GLOBALS['TL_HOOKS']['generatePage'][] = array('WEM\SEO\Hooks', 'applySEORules');
 }
+
+// Adjust Backenduser Navigation
+$GLOBALS['TL_HOOKS']['getUserNavigation'][] = ['WEM\SEO\Hooks', 'reorderUserNavigation'];

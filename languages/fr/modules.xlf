@@ -1,0 +1,19 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/wem-contao-seo/languages/en/modules.php" source-language="en" target-language="fr">
+    <body>
+    	<trans-unit id="MOD.wem_seo">
+			<source>SEO</source>
+			<target>Référencement</target>
+		</trans-unit>
+
+		<trans-unit id="MOD.seo_urls.0">
+			<source>SEO</source>
+			<target>Référencement</target>
+		</trans-unit>
+		<trans-unit id="MOD.seo_urls.1">
+			<source>Manage SEO of your website pages.</source>
+			<target>Gérer le référencement des pages de votre site.</target>
+		</trans-unit>
+    </body>
+  </file>
+</xliff>

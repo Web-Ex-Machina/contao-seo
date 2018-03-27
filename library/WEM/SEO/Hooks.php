@@ -23,6 +23,29 @@ use Contao\FilesModel;
 class Hooks
 {
 	/**
+	 * Reorder User Navigation
+	 * @param  [Array] $arrModules
+	 * @return [Array]
+	 */
+	public function reorderUserNavigation(Array $arrModules)
+	{
+		// Move Page Module
+		// Maybe it must be moved elsewhere, in a SmartGear global module
+		array_insert($arrModules['content']['modules'], 0, array("page" => $arrModules['design']['modules']['page']));
+		unset($arrModules['design']['page']);
+
+		// Move SEO SERP PREVIEW Module
+		$arrModules['wem_seo']['modules']['seo_serp_preview'] = $arrModules['content']['modules']['seo_serp_preview'];
+		unset($arrModules['content']['modules']['seo_serp_preview']);
+
+		// Move Short URLs Module
+		$arrModules['wem_seo']['modules']['shorturls'] = $arrModules['content']['modules']['shorturls'];
+		unset($arrModules['content']['modules']['shorturls']);
+		
+		return $arrModules;
+	}
+
+	/**
 	 * Handle page rules
 	 * @param Object
 	 * @param Object
