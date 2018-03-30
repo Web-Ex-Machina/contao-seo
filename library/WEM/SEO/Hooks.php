@@ -29,11 +29,6 @@ class Hooks
 	 */
 	public function reorderUserNavigation(Array $arrModules)
 	{
-		// Move Page Module
-		// Maybe it must be moved elsewhere, in a SmartGear global module
-		array_insert($arrModules['content']['modules'], 0, array("page" => $arrModules['design']['modules']['page']));
-		unset($arrModules['design']['page']);
-
 		// Move SEO SERP PREVIEW Module
 		$arrModules['wem_seo']['modules']['seo_serp_preview'] = $arrModules['content']['modules']['seo_serp_preview'];
 		unset($arrModules['content']['modules']['seo_serp_preview']);

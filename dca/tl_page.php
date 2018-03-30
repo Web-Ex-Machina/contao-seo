@@ -15,33 +15,6 @@
  * Twitter (https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/summary) : twitter:card, twitter:site, twitter:title, twitter:description, twitter:image, twitter:image:alt
  */
 
-/**
- * Update Regular & Root palette
- */
-$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace
-(
-	'description;',
-	'metaCanonical,metaImage,description;{opengraph_legend:hide},overrideOGTags;{twitter_legend:hide},overrideTwitterTags;',
-	$GLOBALS['TL_DCA']['tl_page']['palettes']['regular']
-);
-$GLOBALS['TL_DCA']['tl_page']['palettes']['root'] = str_replace
-(
-	'pageTitle',
-	'pageTitle,metaCanonical,metaImage;{opengraph_legend:hide},overrideOGTags;{twitter_legend:hide},overrideTwitterTags',
-	$GLOBALS['TL_DCA']['tl_page']['palettes']['root']
-);
-
-/**
- * Update Selector palettes
- */
-$GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'][] = 'overrideOGTags';
-$GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'][] = 'overrideTwitterTags';
-
-/**
- * Update Subpalettes
- */
-$GLOBALS['TL_DCA']['tl_page']['subpalettes']['overrideOGTags'] = 'metaOGTitle,metaOGType,metaOGImage,metaOGUrl,metaOGDescription';
-$GLOBALS['TL_DCA']['tl_page']['subpalettes']['overrideTwitterTags'] = 'metaTwitterCard,metaTwitterSite,metaTwitterTitle,metaTwitterDescription,metaTwitterImage,metaTwitterImageAlt';
 
 /**
  * Add Fields
@@ -166,3 +139,79 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['metaTwitterImageAlt'] = array
 	'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
+
+/**
+ * Remove all the SEO SERP references in the default tl_page
+ */
+if(Input::get('do') == 'page')
+{
+	$GLOBALS['TL_DCA']['tl_page']['palettes']['root'] = str_replace('{meta_legend},pageTitle;', '', $GLOBALS['TL_DCA']['tl_page']['palettes']['root']);
+	$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace('{meta_legend},pageTitle,robots,description,seo_serp_preview;', '', $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+
+	foreach($GLOBALS['TL_DCA']['tl_page']['config']['onload_callback'] as $intKey => $arrCallback)
+	{
+		if($arrCallback[0] == 'Derhaeuptling\SeoSerpPreview\TestsHandler\PageHandler' && $arrCallback[1] == 'initialize')
+		{
+			unset($GLOBALS['TL_DCA']['tl_page']['config']['onload_callback'][$intKey]);
+			break;
+		}
+	}
+}
+else
+{
+	foreach($GLOBALS['TL_DCA']['tl_page']['palettes'] as $strPaletteType => $strPaletteFields)
+	{
+		switch($strPaletteType)
+		{
+			case '__selector__':
+			case 'logout':
+			case 'default':
+			break;
+
+			case 'forward':
+			case 'redirect':
+			case 'root':
+				$GLOBALS['TL_DCA']['tl_page']['palettes'][$strPaletteType] = '{title_legend},title,alias,type;{meta_legend},pageTitle;';
+
+			default:
+				$GLOBALS['TL_DCA']['tl_page']['palettes'][$strPaletteType] = '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description,seo_serp_preview;';
+		}
+	}
+
+	/**
+	 * Update Regular & Root palette
+	 */
+	$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace
+	(
+		'description;',
+		'metaCanonical,metaImage,description;{opengraph_legend:hide},overrideOGTags;{twitter_legend:hide},overrideTwitterTags;',
+		$GLOBALS['TL_DCA']['tl_page']['palettes']['regular']
+	);
+	$GLOBALS['TL_DCA']['tl_page']['palettes']['root'] = str_replace
+	(
+		'pageTitle',
+		'pageTitle,metaCanonical,metaImage;{opengraph_legend:hide},overrideOGTags;{twitter_legend:hide},overrideTwitterTags',
+		$GLOBALS['TL_DCA']['tl_page']['palettes']['root']
+	);
+
+	/**
+	 * Update Selector palettes
+	 */
+	$GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'][] = 'overrideOGTags';
+	$GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'][] = 'overrideTwitterTags';
+
+	/**
+	 * Update Subpalettes
+	 */
+	$GLOBALS['TL_DCA']['tl_page']['subpalettes']['overrideOGTags'] = 'metaOGTitle,metaOGType,metaOGImage,metaOGUrl,metaOGDescription';
+	$GLOBALS['TL_DCA']['tl_page']['subpalettes']['overrideTwitterTags'] = 'metaTwitterCard,metaTwitterSite,metaTwitterTitle,metaTwitterDescription,metaTwitterImage,metaTwitterImageAlt';
+
+	/**
+	 * Update Fields
+	 */
+	$GLOBALS['TL_DCA']['tl_page']['fields']['protected']['filter'] = false;
+	$GLOBALS['TL_DCA']['tl_page']['fields']['groups']['filter'] = false;
+	$GLOBALS['TL_DCA']['tl_page']['fields']['guests']['filter'] = false;
+	$GLOBALS['TL_DCA']['tl_page']['fields']['noSearch']['filter'] = false;
+	$GLOBALS['TL_DCA']['tl_page']['fields']['published']['filter'] = false;
+}
