@@ -143,7 +143,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['metaTwitterImageAlt'] = array
 /**
  * Remove all the SEO SERP references in the default tl_page
  */
-if(Input::get('do') == 'page')
+if(Input::get('do') == 'page' && !Input::get('serp_tests_tmp'))
 {
 	$GLOBALS['TL_DCA']['tl_page']['palettes']['root'] = str_replace('{meta_legend},pageTitle;', '', $GLOBALS['TL_DCA']['tl_page']['palettes']['root']);
 	$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace('{meta_legend},pageTitle,robots,description,seo_serp_preview;', '', $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
@@ -157,8 +157,15 @@ if(Input::get('do') == 'page')
 		}
 	}
 }
-else
+
+/**
+ * SEO Mode
+ */
+if(Input::get('serp_tests_tmp') || Input::get('do') == 'seo_urls')
 {
+	/**
+	 * Update all palettes and operations
+	 */
 	foreach($GLOBALS['TL_DCA']['tl_page']['palettes'] as $strPaletteType => $strPaletteFields)
 	{
 		switch($strPaletteType)
@@ -172,6 +179,7 @@ else
 			case 'redirect':
 			case 'root':
 				$GLOBALS['TL_DCA']['tl_page']['palettes'][$strPaletteType] = '{title_legend},title,alias,type;{meta_legend},pageTitle;';
+			break;
 
 			default:
 				$GLOBALS['TL_DCA']['tl_page']['palettes'][$strPaletteType] = '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description,seo_serp_preview;';
@@ -179,12 +187,28 @@ else
 	}
 
 	/**
+	 * Disable Multiple Edition
+	 */
+	unset($GLOBALS['TL_DCA']['tl_page']['list']['global_operations']['all']);
+
+	/**
+	 * Update Operations (just keep the Edit button)
+	 */
+	foreach($GLOBALS['TL_DCA']['tl_page']['list']['operations'] as $strAction => $arrActions)
+	{
+		if($strAction == "edit")
+			$GLOBALS['TL_DCA']['tl_page']['list']['operations'][$strAction]['button_callback'] = array('tl_wem_page_seo', 'editPage');
+		else
+			unset($GLOBALS['TL_DCA']['tl_page']['list']['operations'][$strAction]);
+	}
+	
+	/**
 	 * Update Regular & Root palette
 	 */
 	$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace
 	(
-		'description;',
-		'metaCanonical,metaImage,description;{opengraph_legend:hide},overrideOGTags;{twitter_legend:hide},overrideTwitterTags;',
+		'seo_serp_preview;',
+		'seo_serp_preview,metaCanonical,metaImage;{opengraph_legend:hide},overrideOGTags;{twitter_legend:hide},overrideTwitterTags;',
 		$GLOBALS['TL_DCA']['tl_page']['palettes']['regular']
 	);
 	$GLOBALS['TL_DCA']['tl_page']['palettes']['root'] = str_replace
@@ -209,9 +233,38 @@ else
 	/**
 	 * Update Fields
 	 */
+	$GLOBALS['TL_DCA']['tl_page']['fields']['type']['filter'] = false;
 	$GLOBALS['TL_DCA']['tl_page']['fields']['protected']['filter'] = false;
 	$GLOBALS['TL_DCA']['tl_page']['fields']['groups']['filter'] = false;
 	$GLOBALS['TL_DCA']['tl_page']['fields']['guests']['filter'] = false;
 	$GLOBALS['TL_DCA']['tl_page']['fields']['noSearch']['filter'] = false;
 	$GLOBALS['TL_DCA']['tl_page']['fields']['published']['filter'] = false;
+}
+
+/**
+ * Extends miscellaneous methods that are used by the data configuration array.
+ *
+ * @author Web ex Machina <https://www.webexmachina.fr>
+ */
+class tl_wem_page_seo extends tl_page
+{
+	/**
+	 * Return the edit page button
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
+	 * @return string
+	 */
+	public function editPage($row, $href, $label, $title, $icon, $attributes)
+	{
+		if($row['type'] == 'regular' || $row['type'] == 'root')
+			return parent::editPage($row, $href, $label, $title, $icon, $attributes);
+		else
+			return Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon));
+	}
 }

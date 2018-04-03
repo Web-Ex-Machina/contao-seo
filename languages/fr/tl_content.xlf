@@ -1,0 +1,14 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="src/Resources/contao/languages/en/tl_content.php" source-language="en" target-language="fr">
+    <body>
+	  <trans-unit id="tl_content.overwriteMeta.0">
+        <source>Overwrite meta data</source>
+        <target>Modifier les balises (SEO)</target>
+      </trans-unit>
+      <trans-unit id="tl_content.overwriteMeta.1">
+        <source>Overwrite the image meta data from the file manager.</source>
+        <target>Écraser les métadonnées de l'image de l'explorateur de fichiers.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

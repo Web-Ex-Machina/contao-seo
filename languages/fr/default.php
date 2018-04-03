@@ -22,9 +22,9 @@ $GLOBALS['TL_LANG']['MSC']['seo_serp_preview.notIndexed'] = 'Cette page ne sera 
 /**
  * SERP tests
  */
-$GLOBALS['TL_LANG']['MSC']['seo_serp_tests.enable']    = ['Activer les SERP', 'Activer l\'analyse des SERP'];
-$GLOBALS['TL_LANG']['MSC']['seo_serp_tests.disable']   = ['Désactiver les SERP', 'Désactiver l\'analyse des SERP'];
-$GLOBALS['TL_LANG']['MSC']['seo_serp_tests.filter']    = ['Filtres SERP:', 'Type de messages'];
+$GLOBALS['TL_LANG']['MSC']['seo_serp_tests.enable']    = ['Activer l\'analyse SEO', 'Activer l\'analyse du référencement'];
+$GLOBALS['TL_LANG']['MSC']['seo_serp_tests.disable']   = ['Désactiver l\'analyse SEO', 'Désactiver l\'analyse du référencement'];
+$GLOBALS['TL_LANG']['MSC']['seo_serp_tests.filter']    = ['Filtres SEO :', 'Type de messages'];
 $GLOBALS['TL_LANG']['MSC']['seo_serp_tests.filterRef'] = [
     'all'      => 'Tous les messages',
     'errors'   => 'Erreurs',

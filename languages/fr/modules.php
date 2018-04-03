@@ -11,5 +11,5 @@
 /**
  * Backend modules
  */
-$GLOBALS['TL_LANG']['MOD']['seo_serp_preview'] = ['SEO SERP'];
-$GLOBALS['TL_LANG']['MOD']['shorturls'] = ['Alias d\'URLs', 'Gérer les alias d\'URLs.'];
+$GLOBALS['TL_LANG']['MOD']['seo_serp_preview'] = ['Analyse SEO'];
+$GLOBALS['TL_LANG']['MOD']['shorturls'] = ['Redirections', 'Gérer les redirections d\'URLs.'];
