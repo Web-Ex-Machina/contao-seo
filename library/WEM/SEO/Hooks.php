@@ -50,6 +50,8 @@ class Hooks
 	{
 		try
 		{
+			dump($objPage);
+
 			$strDomain = Environment::get('base');
 
 			// Get the page title
@@ -79,12 +81,6 @@ class Hooks
 			// Check if we have a meta image
 			if($objPage->metaImage && $objFile = FilesModel::findByUuid($objPage->metaImage))
 				$strMetaImage = $strDomain.$objFile->path;
-			elseif($objPage->alias == 'article' && $objNews = \NewsModel::findByIdOrAlias(\Input::get('auto_item'))){
-				if($objFile = FilesModel::findByUuid($objNews->singleSRC))
-					$strMetaImage = $strDomain.$objFile->path;
-			}
-			else
-				$strMetaImage = $strDomain."files/app/img/banner_1.jpg";
 
 			// Apply Rules
 			if($strCanonical)
@@ -151,6 +147,53 @@ class Hooks
 			// twitter:image:alt
 			if($objPage->overrideTwitterTags && $objPage->metaTwitterImageAlt)
 				$objLayout->head .= sprintf('<meta name="twitter:image:alt" content="%s" />', $objPage->metaTwitterImageAlt);
+		}
+		catch(Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+	public function applySEONewsRules($objTemplate, $arrArticle, $objModule)
+	{
+		try
+		{
+			// Limit the hook to "newsreader" modules
+			if($objModule->type == "newsreader")
+			{
+				global $objPage;
+
+				if($arrArticle['headline'])
+					$objPage->pageTitle = $arrArticle['headline'];
+				
+				if($arrArticle['subheadline'])
+					$objPage->description = $arrArticle['subheadline'];
+				else if($arrArticle['teaser'])
+					$objPage->description = strip_tag($arrArticle['teaser']);
+				
+				if($arrArticle['singleSRC'])
+					$objPage->metaImage = $arrArticle['singleSRC'];
+			}
+		}
+		catch(Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+	public function generateMetaValue($strTag, $varValue)
+	{
+		try
+		{
+			switch($strTag)
+			{
+				case 'og:image':
+					return sprintf('<meta property="og:image" content="%s" />', Environment::get('base').$varValue->path);
+				break;
+
+				default:
+					return sprintf('<meta name="%s" content="%s" />', $strTag, $varValue);
+			}
 		}
 		catch(Exception $e)
 		{

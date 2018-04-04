@@ -34,6 +34,7 @@ if ('BE' === TL_MODE) {
  */
 if('FE' === TL_MODE) {
 	$GLOBALS['TL_HOOKS']['generatePage'][] = array('WEM\SEO\Hooks', 'applySEORules');
+	$GLOBALS['TL_HOOKS']['parseArticles'][] = array('WEM\SEO\Hooks', 'applySEONewsRules');
 }
 
 // Adjust Backenduser Navigation
