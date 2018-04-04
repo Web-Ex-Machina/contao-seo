@@ -10,6 +10,15 @@
 			<target>Balises Twitter</target>
 		</trans-unit>
 
+		<trans-unit id="tl_page.updateSEOFields.0">
+			<source>SEO Fields</source>
+			<target>Champs SEO</target>
+		</trans-unit>
+		<trans-unit id="tl_page.updateSEOFields.1">
+			<source>Update SEO Data</source>
+			<target>Modifier les champs SEO</target>
+		</trans-unit>
+
 		<trans-unit id="tl_page.metaCanonical.0">
 			<source>Canonical URL</source>
 			<target>URL Canonical</target>

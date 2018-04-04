@@ -20,6 +20,7 @@
         "php": ">=5.5",
         "contao/core-bundle": "~3.2 || ~4.1",
         "contao-community-alliance/composer-plugin": "~2.4 || ~3.0",
+        "terminal42/dcawizard":"2.*",
         "derhaeuptling/contao-seo-serp-preview": "^3.0",
         "fritzmg/contao-short-urls": "^1.3"
     },

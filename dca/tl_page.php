@@ -139,14 +139,34 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['metaTwitterImageAlt'] = array
 	'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
+$GLOBALS['TL_DCA']['tl_page']['fields']['updateSEOFields'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_page']['updateSEOFields'],
+	'inputType'               => 'dcaWizard',
+	'foreignTable'            => 'tl_page',
+	'foreignField'            => 'id',
+	'params'                  => array
+    (
+        'do'                  => 'seo_urls',
+    ),
+    'eval'					  => array
+    (
+    	'listCallback' => array('tl_wem_page_seo', 'generateWizardList'),
+    )
+);
+
+if(Input::get('field') == 'updateSEOFields')
+{
+	\Controller::redirect(str_replace("field=updateSEOFields", "act=edit", \Environment::get('request')));
+}
 
 /**
  * Remove all the SEO SERP references in the default tl_page
  */
 if(Input::get('do') == 'page' && !Input::get('serp_tests_tmp'))
 {
-	$GLOBALS['TL_DCA']['tl_page']['palettes']['root'] = str_replace('{meta_legend},pageTitle;', '', $GLOBALS['TL_DCA']['tl_page']['palettes']['root']);
-	$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace('{meta_legend},pageTitle,robots,description,seo_serp_preview;', '', $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
+	$GLOBALS['TL_DCA']['tl_page']['palettes']['root'] = str_replace('pageTitle', 'updateSEOFields', $GLOBALS['TL_DCA']['tl_page']['palettes']['root']);
+	$GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace('pageTitle,robots,description,seo_serp_preview', 'updateSEOFields', $GLOBALS['TL_DCA']['tl_page']['palettes']['regular']);
 
 	foreach($GLOBALS['TL_DCA']['tl_page']['config']['onload_callback'] as $intKey => $arrCallback)
 	{
@@ -266,5 +286,58 @@ class tl_wem_page_seo extends tl_page
 			return parent::editPage($row, $href, $label, $title, $icon, $attributes);
 		else
 			return Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon));
+	}
+
+	/**
+	 * Generate a list of prices for a wizard in products
+	 * @param object
+	 * @param string
+	 * @return string
+	 */
+	public function generateWizardList($objRecords, $strId)
+	{
+		if($objRecords->pageTitle)
+			$arrFields["Title"] = $objRecords->pageTitle;
+		if($objRecords->robots)
+			$arrFields["Robots"] = $objRecords->robots;
+		if($objRecords->description)
+			$arrFields["Description"] = $objRecords->description;
+		if($objRecords->metaCanonical)
+			$arrFields["Canonical"] = $objRecords->metaCanonical;
+		if($objRecords->metaImage && $objFile = \FilesModel::findByUuid($objRecords->metaImage))
+			$arrFields["Image"] = '<a href="'.$objFile->path.'" target="_blank">'.$objFile->name.'</a>';
+
+		$strLines = '';
+		foreach($arrFields as $strKey => $strValue)
+		{
+			$strLines .= '
+				<tr>
+                	<td class="tl_file_list">'.$strKey.'</td>
+                	<td class="tl_file_list">'.$strValue.'</td>
+                </tr>
+			';
+		}
+
+
+	    $strReturn = '
+	    	<div class="dcawizard">
+   				<div class="selector_container">
+                    <table class="tl_listing showColumns">
+            			<thead>
+							<tr>
+								<td class="tl_folder_tlist">Champ / Balise</td>
+                                <td class="tl_folder_tlist">Valeur</td>
+                            </tr>
+                        </thead>
+            			<tbody>
+                            '.$strLines.'
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        ';
+                
+
+	    return $strReturn;
 	}
 }
