@@ -169,7 +169,7 @@ class Hooks
 				if($arrArticle['subheadline'])
 					$objPage->description = $arrArticle['subheadline'];
 				else if($arrArticle['teaser'])
-					$objPage->description = strip_tag($arrArticle['teaser']);
+					$objPage->description = strip_tags($arrArticle['teaser']);
 				
 				if($arrArticle['singleSRC'])
 					$objPage->metaImage = $arrArticle['singleSRC'];
