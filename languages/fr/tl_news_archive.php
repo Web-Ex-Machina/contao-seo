@@ -23,4 +23,4 @@ $GLOBALS['TL_LANG']['tl_news_archive']['seo_serp_ignore'] = [
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_news_archive']['seo_serp_legend'] = 'Paramètres SEO SERP
+$GLOBALS['TL_LANG']['tl_news_archive']['seo_serp_legend'] = 'Paramètres SEO SERP';

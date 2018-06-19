@@ -308,14 +308,17 @@ class tl_wem_page_seo extends tl_page
 			$arrFields["Image"] = '<a href="'.$objFile->path.'" target="_blank">'.$objFile->name.'</a>';
 
 		$strLines = '';
-		foreach($arrFields as $strKey => $strValue)
+		if($arrFields)
 		{
-			$strLines .= '
-				<tr>
-                	<td class="tl_file_list">'.$strKey.'</td>
-                	<td class="tl_file_list">'.$strValue.'</td>
-                </tr>
-			';
+			foreach($arrFields as $strKey => $strValue)
+			{
+				$strLines .= '
+					<tr>
+	                	<td class="tl_file_list">'.$strKey.'</td>
+	                	<td class="tl_file_list">'.$strValue.'</td>
+	                </tr>
+				';
+			}
 		}
 
 
